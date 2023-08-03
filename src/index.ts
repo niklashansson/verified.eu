@@ -1,5 +1,6 @@
 window.Webflow ||= [];
 window.Webflow.push(() => {
+  /* Remove */
   const items = document.querySelectorAll('[nested-collection="item"]');
 
   items.forEach((item) => {
