@@ -5,20 +5,20 @@
 
   // src/utils/navbar.ts
   var navbar = function() {
+    const closeDropdownLinks = document.querySelectorAll('[navbar-element="closedropdown"]');
     function closeWebflowDropdown(webflowDropdown) {
-      const toggleEl = webflowDropdown.firstChild;
+      if (!webflowDropdown)
+        return;
       webflowDropdown.classList.remove("w--open");
     }
     function closeNavDropdown(link) {
       const webflowDropdown = link?.closest("nav");
       closeWebflowDropdown(webflowDropdown);
     }
-    const closeDropdownLinks = document.querySelectorAll('[navbar-element="closedropdown"]');
     closeDropdownLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         closeNavDropdown(link);
-        console.log(link);
       });
     });
   };

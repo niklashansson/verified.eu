@@ -9,4 +9,4 @@ window.Webflow.push(() => {
   navbar();
 });
 
-// <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@8b7936c0787392cfcf350be3b24e51003227d946/dist/index.js"></script>
+// <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@b295932a1f23133b90987ce3eb9f0a44d902cbc2/dist/index.js"></script>
