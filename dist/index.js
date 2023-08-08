@@ -3,6 +3,26 @@
   // bin/live-reload.js
   new EventSource(`${"http://localhost:3000"}/esbuild`).addEventListener("change", () => location.reload());
 
+  // src/utils/navbar.ts
+  var navbar = function() {
+    function closeWebflowDropdown(webflowDropdown) {
+      const toggleEl = webflowDropdown.firstChild;
+      webflowDropdown.classList.remove("w--open");
+    }
+    function closeNavDropdown(link) {
+      const webflowDropdown = link?.closest("nav");
+      closeWebflowDropdown(webflowDropdown);
+    }
+    const closeDropdownLinks = document.querySelectorAll('[navbar-element="closedropdown"]');
+    closeDropdownLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeNavDropdown(link);
+        console.log(link);
+      });
+    });
+  };
+
   // src/utils/nestedCollection.ts
   var nestedCollection = function() {
     const items = document.querySelectorAll('[nested-collection="item"]');
@@ -4262,6 +4282,7 @@
   window.Webflow.push(() => {
     nestedCollection();
     globalSwiper();
+    navbar();
   });
 })();
 //# sourceMappingURL=index.js.map
