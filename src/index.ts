@@ -8,3 +8,5 @@ window.Webflow.push(() => {
   globalSwiper();
   navbar();
 });
+
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@7506ddbcb1f67f95ef08d6d28774aeec70604217/dist/index.min.js"></script> */

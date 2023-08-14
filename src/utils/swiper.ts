@@ -20,25 +20,21 @@ export const globalSwiper = function () {
   });
 
   function newSwiper(el) {
-    const instanceOptions = el.dataset;
+    const options = el.getAttribute('swiper-options');
 
-    const options = {
-      speed: instanceOptions.speed || 800,
-      loop: instanceOptions.loop || false,
-      grabCursor: instanceOptions.grabcursor || false,
-      spaceBetween: instanceOptions.spacebetween || 24,
-      centeredSlides: instanceOptions.centeredslides || false,
-    };
+    console.log(options);
 
-    // Use autoplay
-    if (instanceOptions.autoplay) {
-      options;
-      (options.modules = [Autoplay]),
-        (options.autoplay = {
-          delay: instanceOptions.autoplayDelay,
-        });
-    }
+    const optionVariants = [
+      {
+        speed: 800,
+        loop: false,
+        grabCursor: true,
+        spaceBetween: 128,
+        centeredSlides: false,
+        slidesPerView: 1.5,
+      },
+    ];
 
-    const swiper = new Swiper(el, options);
+    const swiper = new Swiper(el, optionVariants[options - 1]);
   }
 };
