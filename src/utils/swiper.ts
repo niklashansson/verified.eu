@@ -30,8 +30,6 @@ export const globalSwiper = function () {
       return imgElement?.outerHTML;
     });
 
-    console.log(bulletElements);
-
     // Navigation elements
     const prevEl = component.querySelector('[swiper="arrow-prev"]');
     const nextEl = component.querySelector('[swiper="arrow-next"]');
