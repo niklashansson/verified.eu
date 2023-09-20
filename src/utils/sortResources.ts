@@ -1,13 +1,13 @@
 import type { CMSList } from '@finsweet/attributes-cmscore/types';
-import { getCollectionListWrappers } from '@finsweet/ts-utils';
 
-export const resources = function () {
+export const sortResources = function () {
   window.fsAttributes = window.fsAttributes || [];
 
   window.fsAttributes.push([
     'cmscombine',
     (listInstances: CMSList[]) => {
       const [listInstance] = listInstances;
+      if (!listInstance) return;
 
       // Sort items by Publish Date (newest to oldest)
       listInstance.items.sort((a, b) => {
