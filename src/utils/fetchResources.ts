@@ -13,7 +13,7 @@ export const fetchResources = function () {
 
       const slug = el.getAttribute('verified-resources-slug');
 
-      if (slug !== '')
+      if (slug !== '' && enabled)
         console.error(
           `The resource "${slug}" was replaced because CMS field "Get latest published Resource instead?" is enabled for the Resource Position. Disable it to show the resource.`
         );
