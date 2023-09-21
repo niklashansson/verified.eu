@@ -15,4 +15,4 @@ window.Webflow.push(() => {
   fetchResources();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@745ff83d23277f217ccd61c3c87096f286655d87/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@450947a2a346e6f69aed6686e2417c662b130fe5/dist/index.min.js"></script> */
