@@ -17,4 +17,4 @@ window.Webflow.push(() => {
   vimeoPlayer();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@0b6101405209189f12b6b416c42d62dd4001d668/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@7bc7a4a4b6f6c5fe67df0c3151649aceb686dff7/dist/index.min.js"></script> */
