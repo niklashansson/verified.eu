@@ -5,9 +5,11 @@ import { navbar } from '$utils/navbar';
 import { sortResources } from '$utils/sortResources';
 import { globalSwiper } from '$utils/swiper';
 import { vimeoPlayer } from '$utils/vimeoPlayer';
+import { weglot } from '$utils/weglot';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
+  weglot();
   demoModal();
   fetchItems();
   globalSwiper();
@@ -17,4 +19,4 @@ window.Webflow.push(() => {
   vimeoPlayer();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@7bc7a4a4b6f6c5fe67df0c3151649aceb686dff7/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@5735bfa6f44aeaeaa5751a8df8437a75417e60fd/dist/index.min.js"></script> */
