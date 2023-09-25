@@ -1,11 +1,17 @@
+import { closeDropdown } from '@finsweet/ts-utils';
+
 export const navbar = function () {
   if (window.innerWidth >= 992) return;
 
-  const menuEl: HTMLDivElement = document.querySelector('.navbar_menu_wrap');
-  const bannerEl = document.querySelector('.navbar--bg1');
-  const button = document.querySelector('.navbar_button');
-  const dropdownCloseBtns = document.querySelectorAll('.navbar_dd_link_close');
-  if (!menuEl) return;
+  const component = document.querySelector(
+    '[verified-navbar-element="component"]'
+  ) as HTMLDivElement;
+  const menu = document.querySelector('[verified-navbar-element="menu"]') as HTMLMenuElement;
+  const button = document.querySelector('[verified-navbar-element="button"]') as HTMLButtonElement;
+  const dropdownCloseBtns = document.querySelectorAll(
+    '[verified-navbar-element="close-dropdown"]'
+  ) as NodeListOf<HTMLButtonElement>;
+  if (!menu || !component || !dropdownCloseBtns || !button) return;
 
   setMenuHeight(window.innerHeight);
 
@@ -14,16 +20,14 @@ export const navbar = function () {
     const bannerHeight = getBannerHeight();
 
     // 2) set menu height to screen - banner height
-    menuEl.style.height = `${height - bannerHeight}px`;
+    menu.style.height = `${height - bannerHeight}px`;
   }
 
   function getBannerHeight() {
-    if (!bannerEl) return;
-
-    return bannerEl?.clientHeight;
+    return component?.clientHeight;
   }
 
-  button?.addEventListener('click', (e) => {
+  button?.addEventListener('click', () => {
     setMenuHeight(window.innerHeight);
   });
 
@@ -35,9 +39,11 @@ export const navbar = function () {
   // Close dropdown when return link is clicked
   dropdownCloseBtns.forEach((link) => {
     link.addEventListener('click', (e) => {
+      const dropdown = link.closest('.w-dropdown') as HTMLDivElement;
       e.preventDefault();
-      window.Webflow.require('dropdown').preview();
-      window.Webflow.require('dropdown').design();
+      closeDropdown(dropdown);
+      // window.Webflow.require('dropdown').preview();
+      // window.Webflow.require('dropdown').design();
     });
   });
 };
