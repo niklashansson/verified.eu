@@ -1,4 +1,4 @@
-export const demoModal = function () {
+export const setFormMarkets = function () {
   // set locale on hidden input on Demo Form 1 modal
   // get locale from first query path
   const locale: string = getLocale();
@@ -41,8 +41,12 @@ function getLocale() {
 }
 
 function setFormLocale(locale: string) {
-  const hiddenLocaleField = document.querySelector('input[name="market"]') as HTMLInputElement;
+  const hiddenLocaleField = document.querySelectorAll(
+    'input[name="market"]'
+  ) as NodeListOf<HTMLInputElement>;
   if (!hiddenLocaleField) return;
 
-  hiddenLocaleField.value = locale;
+  hiddenLocaleField.forEach((field) => {
+    field.value = locale;
+  });
 }

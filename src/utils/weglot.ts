@@ -20,7 +20,7 @@ export const weglot = function () {
         Weglot.switchTo(lang);
         updateLangSwitcher(lang);
 
-        const dropdownEl = instance.querySelector('[weglot-element]') as HTMLDivElement;
+        const dropdownEl = instance.querySelector('[weglot-element="dropdown"]') as HTMLDivElement;
 
         closeDropdown(dropdownEl);
       });
