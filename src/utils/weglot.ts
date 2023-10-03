@@ -36,21 +36,43 @@ function updateLangSwitchers(currentLang: string) {
 
     if (toggle?.getAttribute('lang') !== currentLang) {
       if (+version === 1) {
-        const activeLangLink = wrapper?.querySelector(`[lang="${currentLang}"]`) as HTMLLinkElement;
-        const toggleFlagEl = toggle?.querySelector('[weglot-element="flag"]') as HTMLDivElement;
-        const activeLangFlagEl = activeLangLink.querySelector(
+        // selects the current (new) lang's link in the dropdown list
+        const currentLangLink = wrapper?.querySelector(
+          `[lang="${currentLang}"]`
+        ) as HTMLLinkElement;
+        // selects the current (new) lang's div with flag svg in it
+        const currentLangFlagEl = currentLangLink.querySelector(
           '[weglot-element="flag"]'
         ) as HTMLDivElement;
+        const currentLangFlagSvg = currentLangFlagEl.innerHTML;
+        // selects the current (new) lang's text
+        const currentLangTxtEl = currentLangLink.querySelector(
+          '[weglot-element="lang-text"]'
+        ) as HTMLDivElement;
 
-        toggleFlagEl.innerHTML = activeLangFlagEl.innerHTML;
-        activeLangFlagEl.innerHTML = toggleFlagEl.innerHTML;
+        const currentLangText = currentLangTxtEl.textContent as string;
 
-        const toggleLang = toggle?.getAttribute('lang') as string;
+        // selects the toggles (previous) lang's div with flag svg in it
+        const toggleFlagEl = toggle?.querySelector('[weglot-element="flag"]') as HTMLDivElement;
+        const toggleFlagSvg = toggleFlagEl.innerHTML;
+        // selects the toggles (previous) lang's hidden text
+        const toggleLangTxtEl = toggle?.querySelector(
+          '[weglot-element="lang-text"]'
+        ) as HTMLDivElement;
+        const toggleLangTxt = toggleLangTxtEl.textContent as string;
 
+        // 1) update toggle values (flag svg, hidden text, attribute)
+        toggleFlagEl.innerHTML = currentLangFlagSvg;
+        toggleLangTxtEl.textContent = currentLangText;
+
+        // 2) replace current lang's values with old lang (flag svg, text, attribute)
+        currentLangFlagEl.innerHTML = toggleFlagSvg;
+        currentLangTxtEl.textContent = toggleLangTxt;
+
+        // 3) update attribute values for both
+        const toggleLangAttr = toggle?.getAttribute('lang') as string;
+        currentLangLink.setAttribute('lang', toggleLangAttr);
         toggle.setAttribute('lang', currentLang);
-        activeLangLink.setAttribute('lang', toggleLang);
-
-        // console.log(activeLangFlagEl.innerHTML);
       }
 
       if (+version === 2) {
