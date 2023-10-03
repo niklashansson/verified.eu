@@ -15,20 +15,20 @@ export const weglot = function () {
       link.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const lang = link.getAttribute('lang');
+        const lang = link.getAttribute('lang') as string;
 
         Weglot.switchTo(lang);
         updateLangSwitcher(lang);
 
         const dropdownEl = instance.querySelector('[weglot-element="dropdown"]') as HTMLDivElement;
 
-        closeDropdown(dropdownEl);
+        // closeDropdown(dropdownEl);
       });
     });
   });
 };
 
-function updateLangSwitcher(currentLang) {
+function updateLangSwitcher(currentLang: string) {
   const wrappers = document.querySelectorAll(
     '[weglot-element="wrapper"]'
   ) as NodeListOf<HTMLDivElement>;

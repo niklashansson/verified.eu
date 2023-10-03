@@ -20,11 +20,25 @@ export const sortResources = function () {
       listInstance.renderItems();
     },
   ]);
-
-  // window.fsAttributes.push([
-  //   'cmsload',
-  //   (listInstances: CMSList[]) => {
-  //     const [listInstance] = listInstances;
-  //   },
-  // ]);
 };
+
+// function getLocale() {
+//   const locPath = window.location.pathname.slice(1, 3);
+//   let localization = '';
+
+//   if (locPath === 'no') localization = 'no';
+//   if (locPath === 'sv') localization = 'sv';
+//   if (locPath === 'fi') localization = 'fi';
+//   if (locPath !== 'no' && locPath !== 'sv' && locPath !== 'fi') localization = 'en';
+
+//   return localization;
+// }
+
+// const locale = getLocale();
+
+// listInstance.items.forEach((item) => {
+//   const hideFromLocale = item.element.querySelector(`[hide-from-${locale}="true"]`);
+//   if (!hideFromLocale) return;
+
+//   item.valid = false;
+// });
