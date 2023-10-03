@@ -19,4 +19,4 @@ window.Webflow.push(() => {
   vimeoPlayer();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@25e95c2461a215992f455558fda19b609a0edc36/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@76cdbbf194797519f86c3c889c1caafe20055ed2/dist/index.min.js"></script> */
