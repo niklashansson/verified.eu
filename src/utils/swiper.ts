@@ -19,10 +19,13 @@ export const globalSwiper = function () {
     // Will contain bullets
     const bulletClass = component.querySelector('[swiper="bullet-class"]')?.className;
     const bulletList = component.querySelector('[swiper="bullet-list"]');
+    const bulletValues = Array.from(
+      component.querySelectorAll('[swiper-pagination-element="value"]')
+    ).map((value) => value.textContent);
 
     // Get text for bullet/tab links
     const slides = Array.from(component.querySelectorAll('.swiper-slide'));
-    const bulletValues = slides.map((slide) => slide.getAttribute('swiper-bullet-value'));
+    // const bulletValues = slides.map((slide) => slide.getAttribute('swiper-bullet-value'));
 
     // Gets author image for option group 2 bullets
     const bulletElements = slides.map((slide) => {

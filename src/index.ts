@@ -9,7 +9,7 @@ import { weglot } from '$utils/weglot';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  weglot();
+  // weglot();
   setFormMarkets();
   fetchItems();
   globalSwiper();
@@ -19,4 +19,4 @@ window.Webflow.push(() => {
   vimeoPlayer();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@caee19494f5ab65857f87036ceba280d8e6d96d2/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@d4148cbecc6075f2e9022f8a6edfb227e1dc1c22/dist/index.min.js"></script> */
