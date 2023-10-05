@@ -8,31 +8,36 @@ export const fetchItems = async function () {
   instances.forEach(async (instance) => {
     const listSlug = instance.getAttribute('bw-cmsfetch-list-slug');
     const itemSlug = instance.getAttribute('bw-cmsfetch-slug');
-    const target = instance.querySelector('[bw-cmsfetch-element="target"]');
-    if (!listSlug || !itemSlug || !target) return;
+    const targets = Array.from(instance.querySelectorAll('[bw-cmsfetch-element="target"]'));
+    const option = instance.getAttribute('bw-cmsfetch-option') || '';
+    if (!listSlug || !itemSlug || !targets) return;
 
     const slug = `/${listSlug}/${itemSlug}`;
 
-    const fetchedElement = await fetchElement(slug);
+    targets.forEach(async (target) => {
+      const fetchedElement = await fetchElement(slug, option);
+      target.innerHTML = '';
+      target.appendChild(fetchedElement);
 
-    target.innerHTML = '';
-    target.appendChild(fetchedElement);
-    const newTarget = target.querySelector('[bw-cmsfetch-element="element"]');
-    restartWebflow();
+      const newTarget = target.querySelector('[bw-cmsfetch-element="element"]');
 
-    newTarget?.classList.add('is-active');
-    target?.classList.add('is-active');
+      restartWebflow();
+      newTarget?.classList.add('is-active');
+      target?.classList.add('is-active');
+    });
   });
 };
 
-async function fetchElement(slug: string) {
+async function fetchElement(slug: string, option: string) {
   try {
     const res = fetch(slug);
     const text = await (await res).text();
     const parser = new DOMParser();
     const html = parser.parseFromString(text, 'text/html');
 
-    const element = html.querySelector('[bw-cmsfetch-element="element"]');
+    const optionAttribute = option !== '' ? `[bw-cmsfetch-option="${option}"]` : '';
+
+    const element = html.querySelector(`[bw-cmsfetch-element="element"]${optionAttribute}`);
 
     if (!element) return;
 
