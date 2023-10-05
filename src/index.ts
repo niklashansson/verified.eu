@@ -9,7 +9,7 @@ import { weglot } from '$utils/weglot';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  // weglot();
+  weglot();
   setFormMarkets();
   fetchItems();
   globalSwiper();
