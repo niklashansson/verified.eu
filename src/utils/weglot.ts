@@ -1,8 +1,8 @@
 import { closeDropdown } from '@finsweet/ts-utils';
 
 export const weglot = function () {
-  // const currentLang = Weglot.getCurrentLang();
-  // updateLangSwitchers(currentLang);
+  const currentLang = Weglot.getCurrentLang();
+  updateLangSwitchers(currentLang);
 
   const instances = document.querySelectorAll(
     '[weglot-element="wrapper"]'
