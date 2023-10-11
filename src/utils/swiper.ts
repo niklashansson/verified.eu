@@ -82,6 +82,9 @@ export const globalSwiper = function () {
           nextEl
         );
 
+      if (+optionsNmbr === 3)
+        options = optionGroup3(bulletList, bulletClass, 'is-active', bulletValues, prevEl, nextEl);
+
       // const options = optionGroups[optionGroup](bulletList, bulletClass, 'is-active', bulletValues);
 
       const swiper = new Swiper(element, options);
@@ -161,6 +164,57 @@ function optionGroup2(
       bulletActiveClass: bulletActiveClass,
       renderBullet: function (index: number, className: string) {
         return `<div class="${className}">${bulletElements[index]}</div>`;
+      },
+    },
+    navigation: {
+      prevEl: prevEl,
+      nextEl: nextEl,
+    },
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+      },
+      // when window width is >= 480px
+      768: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+      },
+      // when window width is >= 992px
+      992: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+      },
+    },
+  };
+}
+
+function optionGroup3(
+  bulletList: Element,
+  bulletClass: string,
+  bulletActiveClass: string,
+  bulletValues: string,
+  prevEl: Element,
+  nextEl: Element
+) {
+  if (!bulletList) return;
+  if (!bulletClass) return;
+  if (!bulletActiveClass) return;
+  if (!bulletValues) return;
+
+  return {
+    modules: [Pagination, Controller, Navigation],
+    speed: 800,
+    spaceBetween: 24,
+    slidesPerView: 2,
+    pagination: {
+      el: bulletList,
+      clickable: true,
+      bulletClass: bulletClass,
+      bulletActiveClass: bulletActiveClass,
+      renderBullet: function (index: number, className: string) {
+        return `<div class="${className}">${bulletValues[index]}</div>`;
       },
     },
     navigation: {
