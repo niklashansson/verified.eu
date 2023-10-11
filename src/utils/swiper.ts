@@ -116,7 +116,7 @@ function optionGroup1(
       bulletClass: bulletClass,
       bulletActiveClass: bulletActiveClass,
       renderBullet: function (index: number, className: string) {
-        return `<div class="${className}">${bulletValues[index]}</div>`;
+        return `<div class="${className}" role="listitem">${bulletValues[index]}</div>`;
       },
     },
     breakpoints: {
@@ -163,7 +163,7 @@ function optionGroup2(
       bulletClass: bulletClass,
       bulletActiveClass: bulletActiveClass,
       renderBullet: function (index: number, className: string) {
-        return `<div class="${className}">${bulletElements[index]}</div>`;
+        return `<div class="${className}" role="listitem">${bulletElements[index]}</div>`;
       },
     },
     navigation: {
@@ -214,7 +214,7 @@ function optionGroup3(
       bulletClass: bulletClass,
       bulletActiveClass: bulletActiveClass,
       renderBullet: function (index: number, className: string) {
-        return `<div class="${className}">${bulletValues[index]}</div>`;
+        return `<div class="${className}" role="listitem">${bulletValues[index]}</div>`;
       },
     },
     navigation: {
