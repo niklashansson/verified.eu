@@ -1,47 +1,37 @@
-import { cloneNode, restartWebflow } from '@finsweet/ts-utils';
-import { Swiper } from 'swiper';
-
 export const fetchItems = async function () {
-  const instances = Array.from(document.querySelectorAll('[bw-cmsfetch-element="instance"]'));
-  if (!instances) return;
+  const instances = document.querySelectorAll('[bw-cmsfetch-slug]');
+  if (!instances.length) return;
 
-  instances.forEach(async (instance) => {
-    const listSlug = instance.getAttribute('bw-cmsfetch-list-slug');
-    const itemSlug = instance.getAttribute('bw-cmsfetch-slug');
-    const targets = Array.from(instance.querySelectorAll('[bw-cmsfetch-element="target"]'));
-    const option = instance.getAttribute('bw-cmsfetch-option') || '';
-    if (!listSlug || !itemSlug || !targets) return;
+  const tasks = Array.from(instances).map(async (instance) => {
+    const collectionSlug: string = instance.getAttribute('bw-cmsfetch-collection') || '';
+    const itemSlug: string = instance.getAttribute('bw-cmsfetch-slug') || '';
+    if (!itemSlug || !collectionSlug) return;
+    const slug = `/${collectionSlug}/${itemSlug}`;
+    const loaderEl =
+      (instance.closest('[bw-cmsfetch-element="loader"]') as HTMLElement) || undefined;
 
-    const slug = `/${listSlug}/${itemSlug}`;
-
-    targets.forEach(async (target) => {
-      const fetchedElement = await fetchElement(slug, option);
-      target.innerHTML = '';
-      target.appendChild(fetchedElement);
-
-      const newTarget = target.querySelector('[bw-cmsfetch-element="element"]');
-
-      restartWebflow();
-      newTarget?.classList.add('is-active');
-      target?.classList.add('is-active');
-    });
+    const extractedEl = (await fetchElement(slug)) as HTMLElement | undefined;
+    if (extractedEl) {
+      extractedEl.className = instance.className;
+      instance.replaceWith(extractedEl);
+    }
+    if (loaderEl) loaderEl.classList.add('is-active');
   });
+
+  await Promise.all(tasks);
 };
 
-async function fetchElement(slug: string, option: string) {
+async function fetchElement(slug: string): Promise<HTMLElement | undefined> {
   try {
-    const res = fetch(slug);
-    const text = await (await res).text();
+    const res = await fetch(slug);
+    if (!res.ok) throw new Error(`Failed to fetch ${slug}`);
+
+    const text = await res.text();
     const parser = new DOMParser();
     const html = parser.parseFromString(text, 'text/html');
+    const element = html.querySelector('[bw-cmsfetch-element="extract-item"]');
 
-    const optionAttribute = option !== '' ? `[bw-cmsfetch-option="${option}"]` : '';
-
-    const element = html.querySelector(`[bw-cmsfetch-element="element"]${optionAttribute}`);
-
-    if (!element) return;
-
-    return element;
+    return element as HTMLElement | undefined;
   } catch (err) {
     console.error(err);
   }

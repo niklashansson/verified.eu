@@ -1,18 +1,20 @@
 export const localization = function () {
   const curLocale = getLocale();
+  // sets current locale's lang code on html doc
   if (curLocale) document.documentElement.setAttribute('lang', curLocale);
 
+  // gets all href links from <head></head>
   const hrefLangLinks = Array.from(document.querySelectorAll('link[hreflang]'));
+  // gets all switch links from language switchers
   const langSwitchLinks = Array.from(document.querySelectorAll('[switcher-lang]'));
 
-  // 1) update each lang link in lang switcher to corresponding page
   hrefLangLinks.forEach((link) => {
-    const localeStr = link.getAttribute('hreflang');
+    const langCode = link.getAttribute('hreflang');
 
-    if (localeStr === curLocale) return;
+    if (langCode === curLocale) return;
 
     const langSwitchLink = langSwitchLinks.find(
-      (link) => link.getAttribute('switcher-lang') === localeStr
+      (link) => link.getAttribute('switcher-lang') === langCode
     );
 
     if (!langSwitchLink) return;
@@ -37,7 +39,7 @@ function getLocale() {
     case 'fi':
       return 'fi';
     default:
-      return 'x-default';
+      return 'en';
   }
 }
 
