@@ -1,90 +1,59 @@
-import { throwError } from '@finsweet/ts-utils';
-
-export const fetchResources = function () {
-  // Select all Resource Positions
+export const fetchResources = () => {
   const elements = Array.from(document.querySelectorAll('[verified-resources-instance]'));
-  if (!elements) return;
+  if (elements.length === 0) return;
 
-  // Include enabled Resource Positions
-  const targetElements = elements
-    .filter((el) => {
-      const enabled = el.getAttribute('verified-resources-instance') === 'true' ? true : false;
-      if (enabled === undefined) throw new Error('Enabled/disabled status not found');
+  const targetElements = getTargetElementsFromEnabledResources(elements);
+  const slugsSet = new Set(elements.map((el) => el.getAttribute('verified-resources-slug')));
 
-      const slug = el.getAttribute('verified-resources-slug');
-
-      if (slug !== '' && enabled)
-        console.error(
-          `The resource "${slug}" was replaced because CMS field "Get latest published Resource instead?" is enabled for the Resource Position. Disable it to show the resource.`
-        );
-
-      return enabled;
-    })
-    .map((el) => {
-      const targetEl = el.closest('[verified-resources-element="target"]');
-      if (!targetEl) throw new Error('Missing target element');
-
-      return targetEl;
-    });
-
-  // Sort Resource Positions by position set in Webflow (mutates original arr)
-  sortTargetElements(targetElements);
-
-  // Collect all slugs from elements
-  const slugs = Array.from(elements.map((el) => el.getAttribute('verified-resources-slug')));
-
-  // Collect three newest posts from each Resource Type (Articles, News Posts, Customer Cases)
   const resources = Array.from(document.querySelectorAll('[verified-resources-element="latest"]'));
-  if (!resources) return;
+  if (resources.length === 0) return;
 
-  // Sort and mutate resources element by Publish Date Webflow CMS field
   sortResources(resources);
 
-  // Exclude resources that is already present
-  const filteredResources = resources.filter((res, i) => {
+  const filteredResources = resources.filter((res) => {
     const slug = res.getAttribute('verified-resources-slug');
-    if (!slug) return;
-
-    return !checkSlug(slugs, slug);
+    return slug && !slugsSet.has(slug);
   });
 
-  // Delete unneeded resources based on amount of Resource Positions
   filteredResources.splice(targetElements.length);
 
   targetElements.forEach((target, i) => {
-    clear(target);
+    target.innerHTML = '';
     target.appendChild(filteredResources[i]);
   });
 };
 
-function clear(el) {
-  el.innerHTML = '';
-}
+function getTargetElementsFromEnabledResources(elements) {
+  return elements
+    .reduce((acc, el) => {
+      const enabled = el.getAttribute('verified-resources-instance');
+      const slug = el.getAttribute('verified-resources-slug');
 
-function sortTargetElements(targetsArr) {
-  targetsArr.sort((a, b) => {
-    const posA = Number(a.getAttribute('verified-resources-sort'));
-    const posB = Number(b.getAttribute('verified-resources-sort'));
+      if (enabled === 'true') {
+        if (slug && slug !== '') {
+          console.error(
+            `The resource "${slug}" was replaced because CMS field "Get latest published Resource instead?" is enabled for the Resource Position. Disable it to show the resource.`
+          );
+        }
 
-    return posA - posB;
-  });
+        const targetEl = el.closest('[verified-resources-element="target"]');
+        if (!targetEl) throw new Error('Missing target element');
+
+        acc.push(targetEl);
+      }
+      return acc;
+    }, [])
+    .sort(
+      (a, b) =>
+        Number(a.getAttribute('verified-resources-sort')) -
+        Number(b.getAttribute('verified-resources-sort'))
+    );
 }
 
 function sortResources(resourcesArr) {
   resourcesArr.sort((a, b) => {
-    const publishedStrA = a.getAttribute('verified-resources-published');
-    const publishedStrB = b.getAttribute('verified-resources-published');
-    if (!publishedStrA || !publishedStrB) return;
-
-    const publishedA = new Date(publishedStrA).getTime();
-    const publishedB = new Date(publishedStrB).getTime();
-
+    const publishedA = new Date(a.getAttribute('verified-resources-published')).getTime();
+    const publishedB = new Date(b.getAttribute('verified-resources-published')).getTime();
     return publishedB - publishedA;
   });
-
-  return resourcesArr;
-}
-
-function checkSlug(arr: Array<string>, slug: string) {
-  return arr.some((arrVal: string) => slug === arrVal);
 }
