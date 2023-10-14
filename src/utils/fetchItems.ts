@@ -1,4 +1,4 @@
-import { Interaction, restartWebflow } from '@finsweet/ts-utils';
+import { restartWebflow } from '@finsweet/ts-utils';
 
 type extractedElements = {
   element: HTMLElement;

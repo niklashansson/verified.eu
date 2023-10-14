@@ -1,6 +1,6 @@
 import './navbar.css';
 
-import { closeDropdown, NAVBAR_CSS_CLASSES } from '@finsweet/ts-utils';
+import { closeDropdown } from '@finsweet/ts-utils';
 
 import { navbarScroll } from './navbarScroll';
 import { adjustMenuHeight } from './navbarUtilities';

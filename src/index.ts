@@ -5,7 +5,7 @@ import { localization } from '$utils/localization';
 import { navbar } from '$utils/navbar/navbar';
 import { sortResources } from '$utils/sortResources';
 import { globalSwiper } from '$utils/swiper';
-import { videojsConfig } from '$utils/videojs/videojs';
+import { videojsConfig } from '$utils/videojs';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -19,6 +19,6 @@ window.Webflow.push(() => {
   fetchResources();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@226422bfd04da234eb0e0fbc1a85e6fb76063912/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@f8d87c705165f89e95bf000bfbe38073c5e97b87/dist/index.min.js"></script> */
 
-/* <link href="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@f401be0b356720438be03e7ec41c2e54991a858b/dist/index.css" rel="stylesheet" type="text/css"/> */
+/* <link href="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@f8d87c705165f89e95bf000bfbe38073c5e97b87/dist/index.css" rel="stylesheet" type="text/css"/> */
