@@ -1,0 +1,109 @@
+.vjs-matrix .vjs-big-play-button {
+  background-color: var(--fc4);
+  width: 3em;
+  height: 3em;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+  border-radius: 100vw;
+  border: none;
+}
+
+.vjs-matrix .vjs-big-play-button .vjs-icon-placeholder::before {
+  position: static;
+  font-size: 150%;
+  line-height: 1.5;
+  color: white;
+}
+
+.vjs-matrix .vjs-tech {
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.vjs-matrix:hover .vjs-big-play-button {
+  opacity: 1;
+  background-color: rgba(0, 128, 255, 0.5);
+  transition: background 200ms, transform 200ms;
+  transform: scale(110%);
+}
+
+.vjs-matrix {
+  border-radius: var(--br1);
+  overflow: hidden;
+  font-family: var(--ff2);
+}
+
+.vjs-poster img {
+  object-fit: cover;
+}
+
+.video-js .vjs-load-progress {
+  display: none !important;
+}
+
+.vjs-matrix
+  :is(
+    .vjs-slider,
+    .vjs-progress-holder,
+    .vjs-slider-horizontal,
+    .vjs-play-progress,
+    .vjs-slider-bar,
+    .vjs-mouse-display,
+
+  ) {
+  border-radius: 10px;
+}
+
+.video-player-hidden {
+  opacity: 0;
+}
+
+.vjs-custom-play :is([video-player-element='overlay'], .vjs-poster, .vjs-big-play-button) {
+  opacity: 0;
+}
+
+.vjs-custom-pause :is([video-player-element='overlay'], .vjs-poster, .vjs-big-play-button) {
+  opacity: 1;
+}
+
+.vjs-matrix .vjs-control-bar {
+  display: flex;
+  transition: opacity 1s, transform 1s;
+  transform: translateY(100%);
+  font-size: 130%;
+  background-color: #0000005e;
+}
+
+.vjs-custom-pause .vjs-control-bar {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.vjs-custom-play .vjs-control-bar {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+:is([video-player-element='overlay']) {
+  transition: opacity 0.75s ease;
+}
+
+:is(.vjs-poster) {
+  transition: opacity 0.5s ease;
+}
+
+.vjs-custom-pause .vjs-poster {
+  display: block;
+  opacity: 1;
+}
+
+.vjs-has-started :is(.vjs-poster) {
+  display: block;
+}
+
+.vjs-paused .vjs-big-play-button {
+  display: block;
+}
