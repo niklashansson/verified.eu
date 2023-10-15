@@ -1,5 +1,3 @@
-import './navbar.css';
-
 import { closeDropdown } from '@finsweet/ts-utils';
 
 import { navbarScroll } from './navbarScroll';
@@ -16,7 +14,6 @@ export const navbar = function () {
   const toggleButton = document.querySelector(
     '[verified-navbar-element="button"]'
   ) as HTMLButtonElement;
-  const overlay = component.querySelector('.w-nav-overlay');
   const dropdownCloseBtns = document.querySelectorAll(
     '[verified-navbar-element="close-dropdown"]'
   ) as NodeListOf<HTMLButtonElement>;
