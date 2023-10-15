@@ -13,8 +13,6 @@ export const videojsConfig = function () {
     const player: Player = videojs(playerEl);
     // instance.classList.add('vjs-custom-pause');
 
-    console.log(player);
-
     player.on('play', () => {
       instance.classList.add('vjs-custom-play');
       instance.classList.remove('vjs-custom-pause');
