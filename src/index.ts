@@ -19,6 +19,6 @@ window.Webflow.push(() => {
   fetchResources();
 });
 
-/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@67d20db7291327fc6ff33fb89bc6366a44c153d0/dist/index.min.js"></script> */
+/* <script defer src="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@69d786eda83b914f3609e8baf97bebe0f86c0170/dist/index.min.js"></script> */
 
 /* <link href="https://cdn.jsdelivr.net/gh/niklashansson/verified.eu@f8d87c705165f89e95bf000bfbe38073c5e97b87/dist/index.css" rel="stylesheet" type="text/css"/> */
